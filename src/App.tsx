@@ -31,6 +31,7 @@ export default function App() {
 			}}
 		>
 			<Container maxWidth="lg">
+				{/* ヘッダー */}
 				<Box display="flex" justifyContent="space-between" mb={3}>
 					<Typography variant="h4">Todo List</Typography>
 					<Button
@@ -45,6 +46,7 @@ export default function App() {
 						追加
 					</Button>
 				</Box>
+
 				{/* Todo一覧 */}
 				<TodoList
 					currentTodos={todos}

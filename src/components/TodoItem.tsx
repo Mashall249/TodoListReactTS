@@ -53,6 +53,7 @@ export const TodoItem: FC<TodoItemProps> = ({ item, onClickEdit, onClickDelete }
 				</Stack>
 			</CardContent>
 
+			{/* ボタンセット */}
 			<CardActions sx={{ justifyContent: 'flex-end' }}>
 				<Button
 					color="primary"
