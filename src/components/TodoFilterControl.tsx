@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import type { FilterBySituation, SortedByDates } from '../types/Todo';
-import { Box, FormControl, MenuItem, Paper, Select, Stack, Typography } from '@mui/material';
+import { FormControl, MenuItem, Paper, Select, Stack, Typography } from '@mui/material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SortIcon from '@mui/icons-material/Sort';
 
@@ -18,54 +18,50 @@ export const TodoFilterControl: FC<FilterProps> = ({
 	onChangeBySort,
 }) => {
 	return (
-		<Box sx={{ mb: 3 }}>
-			<Paper elevation={0} sx={{ p: 2, mt: 2, mb: 2, bgcolor: 'grey.100', borderRadius: 2 }}>
-				<Stack
-					direction={{ xs: 'column', sm: 'row' }}
-					spacing={2}
-					alignItems="center"
-					justifyContent="space-between"
-				>
-					{/* フィルタ */}
-					<Stack direction="row" spacing={1} alignItems="center">
-						<FilterAltIcon fontSize="small" color="action" />
+		<Paper sx={{ p: 2, mb: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
+			<Stack
+				direction={{ xs: 'column', sm: 'row' }}
+				spacing={2}
+				alignItems="center"
+				justifyContent="space-between"
+			>
+				{/* フィルタ */}
+				<Stack direction="row" spacing={1} alignItems="center">
+					<FilterAltIcon fontSize="small" color="action" />
 
-						<Typography variant="body2">状況</Typography>
+					<Typography variant="body2">状況</Typography>
 
-						<FormControl size="small" sx={{ minWidth: 140 }}>
-							<Select
-								value={filter}
-								onChange={(e) =>
-									onChangeByFilter(e.target.value as FilterBySituation)
-								}
-							>
-								<MenuItem value="all">すべて</MenuItem>
-								<MenuItem value="untouch">未着手</MenuItem>
-								<MenuItem value="process">進行中</MenuItem>
-								<MenuItem value="complete">完了</MenuItem>
-							</Select>
-						</FormControl>
-					</Stack>
-
-					{/* ソート */}
-					<Stack direction="row" spacing={1} alignItems="center">
-						<SortIcon fontSize="small" color="action" />
-
-						<Typography variant="body2">並び替え</Typography>
-
-						<FormControl size="small" sx={{ minWidth: 180 }}>
-							<Select
-								value={sortKey}
-								onChange={(e) => onChangeBySort(e.target.value as SortedByDates)}
-							>
-								<MenuItem value="due">期限が近い順</MenuItem>
-								<MenuItem value="created">作成日が古い順</MenuItem>
-								<MenuItem value="updated">更新日が新しい順</MenuItem>
-							</Select>
-						</FormControl>
-					</Stack>
+					<FormControl size="small" sx={{ minWidth: 140 }}>
+						<Select
+							value={filter}
+							onChange={(e) => onChangeByFilter(e.target.value as FilterBySituation)}
+						>
+							<MenuItem value="all">すべて</MenuItem>
+							<MenuItem value="untouch">未着手</MenuItem>
+							<MenuItem value="process">進行中</MenuItem>
+							<MenuItem value="complete">完了</MenuItem>
+						</Select>
+					</FormControl>
 				</Stack>
-			</Paper>
-		</Box>
+
+				{/* ソート */}
+				<Stack direction="row" spacing={1} alignItems="center">
+					<SortIcon fontSize="small" color="action" />
+
+					<Typography variant="body2">並び替え</Typography>
+
+					<FormControl size="small" sx={{ minWidth: 180 }}>
+						<Select
+							value={sortKey}
+							onChange={(e) => onChangeBySort(e.target.value as SortedByDates)}
+						>
+							<MenuItem value="due">期限が近い順</MenuItem>
+							<MenuItem value="created">作成日が古い順</MenuItem>
+							<MenuItem value="updated">更新日が新しい順</MenuItem>
+						</Select>
+					</FormControl>
+				</Stack>
+			</Stack>
+		</Paper>
 	);
 };

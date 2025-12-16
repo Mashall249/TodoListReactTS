@@ -27,16 +27,14 @@ export const TodoForm = ({ defaultValues, isEdit, onSubmitTodo }: TodoFormProps)
 	});
 
 	useEffect(() => {
-		if (defaultValues) {
-			reset(defaultValues);
-		} else {
-			reset({
+		reset(
+			defaultValues ?? {
 				title: '',
 				details: '',
 				situation: 'untouch',
 				dueDate: '',
-			});
-		}
+			}
+		);
 	}, [defaultValues, reset]);
 
 	const onSubmit: SubmitHandler<TodoFormType> = (data) => {

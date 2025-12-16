@@ -5,6 +5,7 @@ import 'dayjs/locale/ja';
 import { formatDate } from '../utils/formatDate';
 import { Delete, Edit } from '@mui/icons-material';
 import { Button, Card, CardActions, CardContent, Chip, Stack, Typography } from '@mui/material';
+import { getSituationColor } from '../utils/getSituationColor';
 dayjs.locale('ja');
 
 type TodoItemProps = {
@@ -31,13 +32,7 @@ export const TodoItem: FC<TodoItemProps> = ({ item, onClickEdit, onClickDelete }
 					<Typography variant="h6">{item.title}</Typography>
 					<Chip
 						label={SITUATION_LABELS[item.situation]}
-						color={
-							item.situation === 'complete'
-								? 'success'
-								: item.situation === 'process'
-								? 'warning'
-								: 'default'
-						}
+						color={getSituationColor(item.situation)}
 						size="small"
 					/>
 				</Stack>
