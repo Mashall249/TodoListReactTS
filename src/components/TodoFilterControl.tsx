@@ -3,6 +3,7 @@ import type { FilterBySituation, SortedByDates } from '../types/Todo';
 import { FormControl, MenuItem, Paper, Select, Stack, Typography } from '@mui/material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SortIcon from '@mui/icons-material/Sort';
+import { SITUATION_OPTIONS } from '../types/TodoSituation';
 
 type FilterProps = {
 	filter: FilterBySituation;
@@ -37,9 +38,11 @@ export const TodoFilterControl: FC<FilterProps> = ({
 							onChange={(e) => onChangeByFilter(e.target.value as FilterBySituation)}
 						>
 							<MenuItem value="all">すべて</MenuItem>
-							<MenuItem value="untouch">未着手</MenuItem>
-							<MenuItem value="process">進行中</MenuItem>
-							<MenuItem value="complete">完了</MenuItem>
+							{SITUATION_OPTIONS.map((s) => (
+								<MenuItem key={s.value} value={s.value}>
+									{s.label}
+								</MenuItem>
+							))}
 						</Select>
 					</FormControl>
 				</Stack>

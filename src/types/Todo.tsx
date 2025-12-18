@@ -1,8 +1,7 @@
 import type { Timestamp } from 'firebase/firestore';
+import type { Situation } from './TodoSituation';
 
-export type Situation = 'untouch' | 'process' | 'complete';
-
-export type FilterBySituation = 'all' | 'untouch' | 'process' | 'complete';
+export type FilterBySituation = 'all' | Situation;
 
 export type SortedByDates = 'all' | 'due' | 'created' | 'updated';
 
@@ -19,12 +18,6 @@ export type TodoEntityType = {
 export type TodoFormType = {
 	title: string;
 	details: string;
-	situation: TodoEntityType['situation'];
+	situation: Situation;
 	dueDate: string;
 };
-
-export const SITUATION_LABELS: Record<Situation, string> = {
-	untouch: '未着手',
-	process: '進行中',
-	complete: '完了',
-} as const;

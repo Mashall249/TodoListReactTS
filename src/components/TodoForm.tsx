@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import type { TodoFormType } from '../types/Todo';
 import { Box, Button, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import { AdsClick } from '@mui/icons-material';
+import { SITUATION_OPTIONS } from '../types/TodoSituation';
 
 type TodoFormProps = {
 	defaultValues?: TodoFormType;
@@ -84,9 +85,11 @@ export const TodoForm = ({ defaultValues, isEdit, onSubmitTodo }: TodoFormProps)
 						rules={{ required: true }}
 						render={({ field }) => (
 							<TextField select label="状況" {...field} fullWidth>
-								<MenuItem value="untouch">未着手</MenuItem>
-								<MenuItem value="process">進行中</MenuItem>
-								<MenuItem value="complete">完了</MenuItem>
+								{SITUATION_OPTIONS.map((s) => (
+									<MenuItem key={s.value} value={s.value}>
+										{s.label}
+									</MenuItem>
+								))}
 							</TextField>
 						)}
 					/>

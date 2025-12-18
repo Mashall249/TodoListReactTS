@@ -1,11 +1,11 @@
 import type { FC } from 'react';
-import { SITUATION_LABELS, type TodoEntityType } from '../types/Todo';
+import type { TodoEntityType } from '../types/Todo';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ja';
 import { formatDate } from '../utils/formatDate';
 import { Delete, Edit } from '@mui/icons-material';
 import { Button, Card, CardActions, CardContent, Chip, Stack, Typography } from '@mui/material';
-import { getSituationColor } from '../utils/getSituationColor';
+import { SITUATION_MASTER } from '../types/TodoSituation';
 dayjs.locale('ja');
 
 type TodoItemProps = {
@@ -31,8 +31,8 @@ export const TodoItem: FC<TodoItemProps> = ({ item, onClickEdit, onClickDelete }
 				<Stack direction="row" justifyContent="space-between" alignItems="center" mb={1}>
 					<Typography variant="h6">{item.title}</Typography>
 					<Chip
-						label={SITUATION_LABELS[item.situation]}
-						color={getSituationColor(item.situation)}
+						label={SITUATION_MASTER[item.situation].label}
+						color={SITUATION_MASTER[item.situation].color}
 						size="small"
 					/>
 				</Stack>
