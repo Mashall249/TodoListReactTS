@@ -1,15 +1,18 @@
 export const SITUATION_MASTER = {
 	untouch: {
 		label: '未着手',
-		color: 'default',
+		chipColor: 'default',
+		borderColor: 'grey.300',
 	},
 	process: {
 		label: '進行中',
-		color: 'warning',
+		chipColor: 'warning',
+		borderColor: 'warning.main',
 	},
 	complete: {
 		label: '完了',
-		color: 'success',
+		chipColor: 'success',
+		borderColor: 'success.main',
 	},
 } as const;
 

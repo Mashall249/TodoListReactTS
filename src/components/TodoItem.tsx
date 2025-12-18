@@ -19,12 +19,7 @@ export const TodoItem: FC<TodoItemProps> = ({ item, onClickEdit, onClickDelete }
 		<Card
 			sx={{
 				borderLeft: 4,
-				borderColor:
-					item.situation === 'complete'
-						? 'success.main'
-						: item.situation === 'process'
-						? 'warning.main'
-						: 'grey.300',
+				borderColor: SITUATION_MASTER[item.situation].borderColor,
 			}}
 		>
 			<CardContent>
@@ -32,7 +27,7 @@ export const TodoItem: FC<TodoItemProps> = ({ item, onClickEdit, onClickDelete }
 					<Typography variant="h6">{item.title}</Typography>
 					<Chip
 						label={SITUATION_MASTER[item.situation].label}
-						color={SITUATION_MASTER[item.situation].color}
+						color={SITUATION_MASTER[item.situation].chipColor}
 						size="small"
 					/>
 				</Stack>
