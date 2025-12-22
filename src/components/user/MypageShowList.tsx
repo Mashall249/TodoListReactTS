@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useTodo } from '../../hooks/useTodo';
 import { Box, Button, Container, Modal, Typography } from '@mui/material';
-import { AddTask } from '@mui/icons-material';
+import { AddTask, Edit } from '@mui/icons-material';
 import { TodoList } from '../todo/TodoList';
 import { TodoForm } from '../todo/TodoForm';
 import { useSnackbar } from '../../hooks/useSnackbar';
 import type { TodoEntityType, TodoFormType } from '../../types/Todo';
+import { useNavigate } from 'react-router-dom';
 
 // APIから来たデータ(ISO文字列)を、フォーム用(YYYY-MM-DD)に変換するヘルパー関数
 const convertEntityToForm = (entity: TodoEntityType): TodoFormType => {
@@ -13,7 +14,7 @@ const convertEntityToForm = (entity: TodoEntityType): TodoFormType => {
 		title: entity.title,
 		details: entity.details,
 		situation: entity.situation,
-		// ISO文字列(2023-01-01T00:00:00) の先頭10文字を切り取れば YYYY-MM-DD になる
+		// ISO文字列(2023-01-01T00:00:00) の先頭10文字を切り取れば YYYY-MM-DD になる（記録→時間、表示→日付）
 		dueDate: entity.dueDate.substring(0, 10),
 	};
 };
@@ -21,6 +22,7 @@ const convertEntityToForm = (entity: TodoEntityType): TodoFormType => {
 export const MypageShowList = () => {
 	const [openModal, setOpenModal] = useState(false);
 	const { showSnackbar } = useSnackbar();
+	const navigate = useNavigate();
 	const {
 		todos,
 		editingTodo,
@@ -69,16 +71,27 @@ export const MypageShowList = () => {
 				{/* ヘッダー */}
 				<Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
 					<Typography variant="h4" fontWeight="bold" color="text.primary">
-						Todo List
+						マイページ
 					</Typography>
-					<Button
-						variant="contained"
-						size="large"
-						startIcon={<AddTask />} // startIconの方が一般的ですがお好みで
-						onClick={handleOpenAdd}
-					>
-						新規追加
-					</Button>
+
+					<Box display="flex" gap={2}>
+						<Button
+							variant="outlined"
+							startIcon={<Edit />}
+							onClick={() => navigate('/user/edit')}
+						>
+							プロフィール編集
+						</Button>
+
+						<Button
+							variant="contained"
+							size="large"
+							startIcon={<AddTask />}
+							onClick={handleOpenAdd}
+						>
+							新規追加
+						</Button>
+					</Box>
 				</Box>
 
 				{/* Todo一覧 */}

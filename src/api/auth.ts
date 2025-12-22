@@ -4,6 +4,7 @@ import type {
 	LoginRequestType,
 	LoginResponseType,
 	RegisterRequestType,
+	UserEntityType,
 } from '../types/User';
 import api from './client';
 
@@ -19,20 +20,25 @@ export const authApi = {
 		await api.post('/user/logout');
 	},
 
+	getProfile: async () => {
+		const res = await api.get<UserEntityType>('/user/profile');
+		return res.data;
+	},
+
 	register: async (data: RegisterRequestType) => {
 		await api.post('/user/register', data);
 	},
 
 	updateProfile: async (data: EditType) => {
-		const res = await api.put<{ username: string }>(`/user/${data.username}`, data);
+		const res = await api.put<UserEntityType>('/user/profile', data);
 		return res.data;
 	},
 
 	changePassword: async (data: ChangePasswordType) => {
-		await api.put(`/user/${data.username}/password`, data);
+		await api.put('/user/password', data);
 	},
 
-	deleteAccount: async (username: string) => {
-		await api.delete(`/user/${username}`);
+	deleteAccount: async () => {
+		await api.delete('/user/profile');
 	},
 };

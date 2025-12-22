@@ -17,6 +17,8 @@ export const useAuth = () => {
 		if (res.username && res.username !== username) {
 			updateUsername(res.username);
 		}
+
+		return res;
 	};
 
 	const changePassword = async (data: ChangePasswordType) => {
@@ -24,8 +26,7 @@ export const useAuth = () => {
 	};
 
 	const deleteAccount = async () => {
-		if (!username) return;
-		await authApi.deleteAccount(username);
+		await authApi.deleteAccount();
 		await logout();
 	};
 
