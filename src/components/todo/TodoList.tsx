@@ -1,28 +1,23 @@
 import type { FC } from 'react';
-import type { FilterBySituation, SortedByDates, TodoEntityType } from '../types/Todo';
+import type { TodoEntityType } from '../../types/Todo';
 import { TodoItem } from './TodoItem';
-import { TodoFilterControl } from './TodoFilterControl';
+import { TodoFilterControl, type TodoFilterProps } from './TodoFilterControl';
 import { Grid, Paper, Typography } from '@mui/material';
 
-type TodoListProps = {
-	currentTodos: TodoEntityType[];
+type TodoListProps = TodoFilterProps & {
+	todos: TodoEntityType[];
 	onClickEdit: (todo: TodoEntityType) => void;
-	onClickDelete: (id: string) => void;
-
-	filter: FilterBySituation;
-	sortKey: SortedByDates;
-	onChangeByFilter: (v: FilterBySituation) => void;
-	onChangeBySort: (v: SortedByDates) => void;
+	onClickDelete: (id: number) => void;
 };
 
 export const TodoList: FC<TodoListProps> = ({
-	currentTodos,
+	todos,
 	onClickEdit,
 	onClickDelete,
 	filter,
 	sortKey,
-	onChangeByFilter,
-	onChangeBySort,
+	setFilter,
+	setSortKey,
 }) => {
 	return (
 		<Paper
@@ -38,12 +33,22 @@ export const TodoList: FC<TodoListProps> = ({
 			<TodoFilterControl
 				filter={filter}
 				sortKey={sortKey}
-				onChangeByFilter={onChangeByFilter}
-				onChangeBySort={onChangeBySort}
+				setFilter={setFilter}
+				setSortKey={setSortKey}
 			/>
 
+			{todos.length === 0 && (
+				<Typography
+					variant="body1"
+					color="text.secondary"
+					sx={{ mt: 4, textAlign: 'center' }}
+				>
+					表示するTodoはありません
+				</Typography>
+			)}
+
 			<Grid container spacing={2} sx={{ mt: 2 }}>
-				{currentTodos.map((todo) => (
+				{todos.map((todo) => (
 					<Grid size={{ xs: 12, sm: 6, md: 4 }} key={todo.id}>
 						<TodoItem
 							item={todo}
