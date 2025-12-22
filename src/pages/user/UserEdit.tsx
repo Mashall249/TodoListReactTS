@@ -13,7 +13,7 @@ import { authApi } from '../../api/auth';
 
 export const UserEdit = () => {
 	const navigate = useNavigate();
-	const { updateProfile, changePassword, deleteAccount, logout, username } = useAuth();
+	const { updateProfile, changePassword, deleteAccount } = useAuth();
 	const { showSnackbar } = useSnackbar();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
@@ -39,18 +39,9 @@ export const UserEdit = () => {
 	const handleProfileEdit = async (data: EditType) => {
 		try {
 			setLoading(true);
-			const oldUsername = username;
-			const updatedUser = await updateProfile(data);
-
+			await updateProfile(data);
 			showSnackbar('プロフィールを更新しました', 'success');
-
-			if (updatedUser.username !== oldUsername) {
-				await logout();
-				showSnackbar('ユーザー名が変更されたため、再ログインが必要です', 'info');
-				navigate('/user/login');
-			} else {
-				navigate('/user/mypage');
-			}
+			navigate('/user/mypage');
 		} catch (e) {
 			setError(getApiErrorMessage(e));
 		} finally {
