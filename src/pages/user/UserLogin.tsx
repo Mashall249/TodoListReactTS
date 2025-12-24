@@ -5,7 +5,6 @@ import { useState } from 'react';
 import type { LoginRequestType } from '../../types/User';
 import { ErrorMessage } from '../../components/ErrorMessage';
 import { useAuth } from '../../hooks/useAuth';
-import { getApiErrorMessage } from '../../utils/error';
 
 export const UserLogin = () => {
 	const navigate = useNavigate();
@@ -21,8 +20,9 @@ export const UserLogin = () => {
 			await login(data.username, data.password);
 
 			navigate('/user/mypage');
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		} catch (e) {
-			setError(getApiErrorMessage(e));
+			setError('ユーザー名もしくはパスワードが間違っています。');
 		} finally {
 			setLoading(false);
 		}

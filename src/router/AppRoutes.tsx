@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
+
 // レイアウト
 import { RootLayout } from '../layouts/RootLayout';
 import { ProtectedLayout } from '../layouts/ProtectedLayout';

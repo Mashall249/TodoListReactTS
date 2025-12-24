@@ -31,11 +31,13 @@ export const UserRegister = () => {
 		}
 	};
 	return (
-		<Box>
-			<Typography variant="h5">新規登録</Typography>
+		<Box maxWidth={400} mx="auto" mt={4}>
+			<Typography variant="h5" mb={2}>
+				新規登録
+			</Typography>
 			<ErrorMessage message={error} />
 			<RegisterForm onSubmitUser={handleRegister} isLoading={isLoading} />
-			<Typography variant="body1" mt={2}>
+			<Typography variant="body2" mt={2} textAlign="right">
 				ログインは<Link to="/user/login">こちら</Link>
 			</Typography>
 		</Box>

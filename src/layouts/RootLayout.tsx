@@ -40,7 +40,7 @@ export const RootLayout = () => {
 			</AppBar>
 
 			{/* メインコンテンツエリア */}
-			<Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
+			<Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
 				<Outlet />
 			</Container>
 		</Box>

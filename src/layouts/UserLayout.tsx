@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 export const UserLayout = () => {
 	return (
-		<Container maxWidth="lg">
+		<Container maxWidth="md">
 			<Outlet />
 		</Container>
 	);

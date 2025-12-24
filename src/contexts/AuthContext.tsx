@@ -17,6 +17,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [isInitialized, setIsInitialized] = useState(false); // 初期化完了フラグ
 
+	// 初期化処理
 	useEffect(() => {
 		const token = authStorage.getToken();
 		const storedUser = authStorage.getUsername();

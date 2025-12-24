@@ -19,6 +19,7 @@ export const UserEdit = () => {
 	const [error, setError] = useState<string | null>(null);
 	const [openConfirm, setOpenConfirm] = useState(false);
 	const [defaultValues, setDefaultValues] = useState<EditType | null>(null);
+	const [isFetching, setIsFetching] = useState(true);
 
 	useEffect(() => {
 		const fetchProfile = async () => {
@@ -31,6 +32,8 @@ export const UserEdit = () => {
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			} catch (e) {
 				setError('ユーザー情報の取得に失敗しました');
+			} finally {
+				setIsFetching(false);
 			}
 		};
 		fetchProfile();
@@ -61,42 +64,56 @@ export const UserEdit = () => {
 		await deleteAccount();
 	};
 
-	if (!defaultValues) return <CircularProgress />;
-
 	return (
 		<Box maxWidth={500} mx="auto" py={4}>
 			<Typography variant="h5" mb={2} fontWeight="bold">
 				ユーザー編集
 			</Typography>
 
-			<ErrorMessage message={error} />
-			<EditForm
-				onSubmitUser={handleProfileEdit}
-				defaultValues={defaultValues}
-				isLoading={loading}
-			/>
-			<Divider sx={{ my: 4 }} />
+			{/* ロード中 */}
+			{isFetching ? (
+				<Box display="flex" justifyContent="center" alignItems="center" minHeight={200}>
+					<CircularProgress />
+				</Box>
+			) : (
+				<>
+					{/* ロード終了後 */}
+					<ErrorMessage message={error} />
 
-			<Typography variant="h6" mb={2}>
-				パスワード変更
-			</Typography>
+					{/* データが取れていればフォームを表示 */}
+					{defaultValues && (
+						<>
+							<EditForm
+								onSubmitUser={handleProfileEdit}
+								defaultValues={defaultValues}
+								isLoading={loading}
+							/>
 
-			<PasswordForm onSubmit={handlePassword} />
+							<Divider sx={{ my: 4 }} />
 
-			<Divider sx={{ my: 4 }} />
+							<Typography variant="h6" mb={2}>
+								パスワード変更
+							</Typography>
 
-			{/* 退会 */}
-			<Button color="error" onClick={() => setOpenConfirm(true)}>
-				退会する
-			</Button>
+							<PasswordForm onSubmit={handlePassword} />
 
-			<ConfirmDialog
-				open={openConfirm}
-				title="退会確認"
-				message="本当に退会しますか？この操作は取り消せません。"
-				onCancel={() => setOpenConfirm(false)}
-				onConfirm={handleDelete}
-			/>
+							<Divider sx={{ my: 4 }} />
+
+							<Button color="error" onClick={() => setOpenConfirm(true)}>
+								退会する
+							</Button>
+
+							<ConfirmDialog
+								open={openConfirm}
+								title="退会確認"
+								message="本当に退会しますか？この操作は取り消せません。"
+								onCancel={() => setOpenConfirm(false)}
+								onConfirm={handleDelete}
+							/>
+						</>
+					)}
+				</>
+			)}
 		</Box>
 	);
 };

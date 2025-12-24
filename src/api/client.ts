@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { authStorage } from '../utils/storage';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
+// axiosインスタンス
 const api = axios.create({
 	baseURL: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080', // SpringBoot
-	withCredentials: true,
+	withCredentials: true, // Cookie
 	headers: {
 		'Content-Type': 'application/json',
 	},
@@ -25,10 +28,13 @@ api.interceptors.request.use(
 api.interceptors.response.use(
 	(response) => response,
 	(error) => {
+		const { logout } = useAuth();
+		const navigate = useNavigate();
+
 		//401 Unauthorized（シンプルにログイン画面に飛ばす）
 		if (error.response.status === 401) {
-			authStorage.clear();
-			window.location.href = '/user/login';
+			logout();
+			navigate('/user/login', { replace: true });
 		}
 
 		return Promise.reject(error);

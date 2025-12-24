@@ -8,7 +8,6 @@ const ConfirmProvider = ({ children }: { children: ReactNode }) => {
 	const [open, setOpen] = useState(false);
 	const [options, setOptions] = useState<ConfirmOptions>({ message: '' });
 
-	// ?
 	const resolverRef = useRef<((value: boolean) => void) | null>(null);
 
 	const confirm = useCallback((options: ConfirmOptions) => {
