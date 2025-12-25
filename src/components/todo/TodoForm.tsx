@@ -49,7 +49,7 @@ export const TodoForm = ({ defaultValues, isEdit, onSubmitTodo }: TodoFormProps)
 				<Stack spacing={2}>
 					<TextField
 						label="タイトル"
-						placeholder="例：牛乳を買う"
+						placeholder="タイトルを入力してください"
 						{...register('title', {
 							required: 'タイトルは必須です。',
 							maxLength: { value: 30, message: '30文字以内で入力してください。' },

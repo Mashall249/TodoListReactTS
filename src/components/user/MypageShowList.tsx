@@ -58,9 +58,9 @@ export const MypageShowList = () => {
 			const result = await saveTodo(data);
 			showSnackbar(result === 'add' ? 'Todoを追加しました' : 'Todoを更新しました', 'success');
 			handleCloseModal();
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		} catch (error) {
+		} catch (e) {
 			// エラー処理はapiやhook側でログが出ているが、UIにも通知するならここ
+			console.error(e);
 			showSnackbar('保存に失敗しました', 'error');
 		}
 	};

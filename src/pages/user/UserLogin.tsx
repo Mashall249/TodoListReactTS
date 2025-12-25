@@ -20,8 +20,8 @@ export const UserLogin = () => {
 			await login(data.username, data.password);
 
 			navigate('/user/mypage');
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		} catch (e) {
+			console.error(e);
 			setError('ユーザー名もしくはパスワードが間違っています。');
 		} finally {
 			setLoading(false);

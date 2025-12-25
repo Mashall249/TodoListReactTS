@@ -23,18 +23,24 @@ export const RootLayout = () => {
 					</Typography>
 
 					{/* ナビゲーションボタン */}
-					<Button color="inherit" component={RouterLink} to="/">
-						Home
-					</Button>
-
 					{!isAuthenticated ? (
-						<Button color="inherit" component={RouterLink} to="/user/login">
-							ログイン
-						</Button>
+						<>
+							<Button color="inherit" component={RouterLink} to="/">
+								Home
+							</Button>
+							<Button color="inherit" component={RouterLink} to="/user/login">
+								ログイン
+							</Button>
+						</>
 					) : (
-						<Button color="inherit" onClick={handleLogout}>
-							ログアウト
-						</Button>
+						<>
+							<Button color="inherit" component={RouterLink} to="/user/mypage">
+								マイページ
+							</Button>
+							<Button color="inherit" onClick={handleLogout}>
+								ログアウト
+							</Button>
+						</>
 					)}
 				</Toolbar>
 			</AppBar>

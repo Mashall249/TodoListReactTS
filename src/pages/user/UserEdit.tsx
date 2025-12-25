@@ -29,8 +29,8 @@ export const UserEdit = () => {
 					username: user.username,
 					email: user.email,
 				});
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			} catch (e) {
+				console.error(e);
 				setError('ユーザー情報の取得に失敗しました');
 			} finally {
 				setIsFetching(false);
